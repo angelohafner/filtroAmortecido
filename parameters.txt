@@ -1,0 +1,32 @@
+# Frequência fundamental em Hz
+f1 = 60
+
+# Resistência em ohms do resistor principal
+R = 222
+
+# Resistência em ohms do indutor
+r = 0.792
+
+# Indutância do indutor em miliHenries (mH)
+L_mH = 34.303
+
+# Capacitância do capacitor em microFarads (uF)
+C_uF = 8.543
+
+# Tensão de linha em kV (quilovolts)
+V_line_kV = 34.5
+
+# Sobretensão permitida nos capacitores (fator de multiplicação)
+capacitor_overvoltage = 1.3
+
+# Sobrecorrente permitida no indutor (fator de multiplicação)
+inductor_overcurrent = 1.66
+
+# Sobrecorrente permitida no resistor (fator de multiplicação)
+resistor_overcurrent = 1.66
+
+# Número de capacitores em série
+series_cap_count = 2
+
+# Número de capacitores em paralelo
+parallel_cap_count = 2
