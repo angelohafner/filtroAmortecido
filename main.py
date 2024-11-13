@@ -4,6 +4,8 @@ import pandas as pd
 import json
 import os
 from matplotlib.ticker import EngFormatter
+import chardet
+
 
 # Arquivo base para download
 PARAMETERS_FILE = "parameters.txt"
@@ -51,10 +53,13 @@ parallel_cap_count = 2
 def load_parameters(uploaded_file):
     parameters = {}
 
-    if isinstance(uploaded_file, bytes):
-        file_content = uploaded_file.decode("utf-8").splitlines()
-    else:
-        file_content = uploaded_file.read().decode("utf-8").splitlines()
+    # Detectar a codificação do arquivo
+    raw_data = uploaded_file.read()
+    result = chardet.detect(raw_data)
+    encoding = result['encoding']
+
+    # Ler o arquivo usando a codificação detectada
+    file_content = raw_data.decode(encoding).splitlines()
 
     for line in file_content:
         if line.strip() and not line.startswith("#"):
@@ -230,7 +235,8 @@ with open(PARAMETERS_FILE, "rb") as file:
 
 # Upload do arquivo parameters.txt após edição
 st.header("2. Faça o upload do arquivo parameters.txt editado")
-uploaded_file = st.file_uploader("Carregue o arquivo parameters.txt editado", type="txt")
+# Upload de qualquer arquivo de texto com extensão .txt
+uploaded_file = st.file_uploader("Carregue um arquivo de parâmetros (.txt)", type="txt")
 
 if uploaded_file:
     # Carregar parâmetros e exibir valores
